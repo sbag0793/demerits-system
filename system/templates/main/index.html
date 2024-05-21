@@ -4,23 +4,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>main page</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
   <!-- hnav.onclick(nav 하단 슬라이드 + (header, nav) 백그라운드 동시 변화) -->
   <div class="container" id="hnav">
-    <header class="container">
-      <h1 class="text-center d-block">Title</h1>
+    <header class="container border-bottom bg-light-subtle">
+      <h1>Title</h1>
     </header>
-    <nav class="container d-flex justify-content-around">
-      <div class="container flex-fill"><a href="{{ url_for('') }}" class="d-block"></a></div>
-      <div class="container flex-fill"><a href="#" class="d-block"></a></div>
-      <div class="container flex-fill"><a href="#" class="d-block"></a></div>
+    <nav class="container bg-light p-0">
+      <div class="container"><a href="#" class="text-center">a</a></div>
+      <div class="container"><a href="#" class="text-center">b</a></div>
+      <div class="container"><a href="#" class="text-center">c</a></div>
     </nav>
   </div>
-  <section class="container">
-    <!-- 대쉬보드 -->
-  </section>
+  <!-- 대쉬보드 -->
+  <div class="container">
+    <section class="container border-bottom border-primary border-5">
+      
+    </section>
+  </div>
 </body>
 </html>
