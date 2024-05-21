@@ -1,0 +1,22 @@
+* {
+  list-style: none;
+  text-decoration: none;
+  padding: 0;
+  margin: 0;
+}
+/* header */
+header {
+  height: 6rem;
+}
+header h1 {
+  height: 100%;
+}
+/* nav */
+nav {
+  height: 4rem;
+}
+nav a {
+  width: 100%;
+  height: 100%;
+}
+/* section */
