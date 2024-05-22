@@ -35,3 +35,7 @@ nav a {
   text-decoration: none;
 }
 /* section */
+section .main_table {
+  height: 10rem;
+  text-align: center;
+}

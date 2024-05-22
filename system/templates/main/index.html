@@ -1,29 +1,35 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>main page</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-  <!-- hnav.onclick(nav 하단 슬라이드 + (header, nav) 백그라운드 동시 변화) -->
-  <div class="container" id="hnav">
-    <header class="container border-bottom bg-light-subtle">
-      <h1>Title</h1>
-    </header>
-    <nav class="container bg-light p-0">
-      <div class="container"><a href="#" class="text-center">a</a></div>
-      <div class="container"><a href="#" class="text-center">b</a></div>
-      <div class="container"><a href="#" class="text-center">c</a></div>
-    </nav>
-  </div>
-  <!-- 대쉬보드 -->
-  <div class="container">
-    <section class="container border-bottom border-primary border-5">
-      
-    </section>
-  </div>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block content %}
+<table class="table main_table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">type</th>
+      <th scope="col">score</th>
+      <th scope="col">reason</th>
+      <th scope="col">from</th>
+      <th scope="col">to</th>
+      <th scope="col">date</th>
+    </tr>
+  </thead>
+  <tbody class="table-group-divider">
+    {% if event_list %}
+    {% for event in event_list %}
+    <tr>
+      <th scope="row">{{ loop.revindex }}</th>
+      <td>{{ event._type }}</td>
+      <td>{{ event.score }}</td>
+      <td>{{ event.reason }}</td>
+      <td>{{ event.teacher.name }}</td>
+      <td>{{ event.student.name }}</td>
+      <td>{{ event.event_date }}</td>
+    </tr>
+    {% endfor %}
+    {% else %}
+    <tr>
+      <td colspan="7" rowspan="5" style="line-height: 10rem;">이벤트가 발생하지 않았습니다.</td>
+    </tr>
+    {% endif %}
+  </tbody>
+</table>
+{% endblock %}
