@@ -1,8 +1,5 @@
 {% extends 'base.html' %}
 {% block content %}
-{% if tag %}
-{{ tag }}
-{% endif %}
 <section class="border-top border-primary border-5 register">
   <div class="border left">
     <form method="post" name="studentAddForm" class="post-form">
@@ -61,6 +58,37 @@
       <input type="submit" class="form-control btn btn-primary">
     </form>
   </div>
-  <div class="border right"></div>
+  <div class="border right">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <!-- <th scope="col">id</th> -->
+          <th scope="col">grade</th>
+          <th scope="col">class</th>
+          <th scope="col">number</th>
+          <th scope="col">name</th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+        {% if student_list %}
+        {% for student in student_list %}
+        <tr>
+          <th scope="row">{{ loop.revindex }}</th>
+          <!-- <td>{{ student.id }}</td> -->
+          <td>{{ student.grade }}</td>
+          <td>{{ student.Class }}</td>
+          <td>{{ student.number }}</td>
+          <td>{{ student.name }}</td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+          <td colspan="6" class="text-body-secondary">등록된 학생이 없습니다.</td>
+        </tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
 </section>
 {% endblock %}
