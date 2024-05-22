@@ -3,7 +3,7 @@ from system import db
 # 데이터 입력 시 외래키는 입력 X, 해당하는 객체만 입력
 class Event(db.Model):
   id = db.Column(db.Integer, primary_key=True)
-  _type = db.Column(db.String(10), nullable=False)
+  Type = db.Column(db.String(10), nullable=False)
   score = db.Column(db.Integer, nullable=False)
   reason = db.Column(db.Text(), nullable=False)
   teacher_id = db.Column(db.Integer, db.ForeignKey('teacher.id', ondelete='CASCADE'))
@@ -21,6 +21,6 @@ class Teacher(db.Model):
 class Student(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   grade = db.Column(db.Integer, nullable=False)
-  _class = db.Column(db.Integer, nullable=False)
+  Class = db.Column(db.Integer, nullable=False)
   number = db.Column(db.Integer, nullable=False)
   name = db.Column(db.String(30), nullable=False)
