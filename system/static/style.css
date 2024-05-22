@@ -22,10 +22,6 @@ nav {
   display: flex;
   justify-content: space-around;
 }
-nav > div {
-  flex: 0.3;
-  position: relative;
-}
 nav a {
   width: 100%;
   line-height: 4rem;
@@ -35,7 +31,18 @@ nav a {
   text-decoration: none;
 }
 /* section */
+section {
+  display: flex;
+}
 section .main_table {
   height: 20rem;
   text-align: center;
+}
+section.register {
+  display: flex;
+  height: 20rem;
+  justify-content: space-around;
+}
+section.register > div {
+  flex: 0.4;
 }
