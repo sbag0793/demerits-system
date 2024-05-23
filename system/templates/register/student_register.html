@@ -1,10 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
-<section class="border-top border-primary border-5 register">
+<section class="border-top border-primary border-5 register py-3">
+  <!-- <div class="widget">
+    <button id="studentButton" class="custom-button">Student</button>
+    <button id="teacherButton" class="custom-button">Teacher</button>
+</div>
+<script src="{{ url_for('static/script.js') }}"></script> -->
   <div class="border left">
     <form method="post" name="studentAddForm" class="post-form">
       {{ form.csrf_token }}
 
+      <!-- 폼 에러 알림 -->
       {% if form.errors %}
       <div class="alert alert-danger" role="alert">
         {% for field, errors in form.errors.items() %}
@@ -18,6 +24,7 @@
       {% endfor %}
       {% endif %}
 
+      <!-- 학생 등록 테이블 -->
       <table class="table text-center">
         <tr class="">
           <th>grade</th>
@@ -58,12 +65,12 @@
       <input type="submit" class="form-control btn btn-primary">
     </form>
   </div>
+  <!-- 학생 테이블 뷰어 -->
   <div class="border right">
     <table class="table">
       <thead>
         <tr>
           <th scope="col">#</th>
-          <!-- <th scope="col">id</th> -->
           <th scope="col">grade</th>
           <th scope="col">class</th>
           <th scope="col">number</th>
@@ -75,10 +82,9 @@
         {% for student in student_list %}
         <tr>
           <th scope="row">{{ loop.revindex }}</th>
-          <!-- <td>{{ student.id }}</td> -->
-          <td>{{ student.grade }}</td>
-          <td>{{ student.Class }}</td>
-          <td>{{ student.number }}</td>
+          <td>{{ student.grade }}학년</td>
+          <td>{{ student.Class }}반</td>
+          <td>{{ student.number }}번</td>
           <td>{{ student.name }}</td>
         </tr>
         {% endfor %}

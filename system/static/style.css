@@ -46,3 +46,43 @@ section.register {
 section.register > div {
   flex: 0.4;
 }
+
+/* 테스트 */
+/* body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f0f0f0;
+}
+
+.widget {
+  display: flex;
+  justify-content: space-between;
+  width: 300px;
+  padding: 20px;
+  background-color: rgba(128, 128, 128, 0.5);
+  border-radius: 10px;
+}
+
+.custom-button {
+  width: 100px;
+  padding: 10px;
+  background-color: rgba(128, 128, 128, 0.7);
+  border: none;
+  border-radius: 5px;
+  color: #000;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.custom-button:hover {
+  color: #000;
+  font-size: 18px;
+}
+
+.custom-button:focus {
+  outline: none;
+} */
