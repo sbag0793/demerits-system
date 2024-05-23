@@ -26,6 +26,6 @@ def index():
       grade=form.grade.data,
       Class=form.Class.data
     ).all()
-    return render_template('event/event.html', reason_list=reason_list, student_list=student_list)
+    return render_template('event/event.html', reason_list=reason_list, student_list=student_list, a=form.validate_on_submit())
   else:
-    return render_template('event/event.html', reason_list=reason_list, form=form, a=form.grade.data, b=form.Class.data, c=form.validate_on_submit(), d=type(form.grade.data), e=type(form.Class.data))
+    return render_template('event/event.html', reason_list=reason_list, form=form, a=form.validate_on_submit())

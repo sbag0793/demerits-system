@@ -1,5 +1,5 @@
 from system import db
-from sqlalchemy import PrimaryKeyConstraint
+from sqlalchemy import PrimaryKeyConstraint, UniqueConstraint
 
 
 # 데이터 입력 시 외래키는 입력 X, 해당하는 객체만 입력
@@ -22,12 +22,12 @@ class Teacher(db.Model):
   name = db.Column(db.String(30), nullable=False)
 
 class Student(db.Model):
-  id = db.Column(db.Integer, primary_key=True, autoincrement=True, default=1)
+  id = db.Column(db.Integer, primary_key=True)
   grade = db.Column(db.Integer, nullable=False)
   Class = db.Column(db.Integer, nullable=False)
   number = db.Column(db.Integer, nullable=False)
   name = db.Column(db.String(30), nullable=False)
   __table_args__ = (
-        PrimaryKeyConstraint(grade, Class, number),
+        UniqueConstraint(grade, Class, number),
         {},
     )
