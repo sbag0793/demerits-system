@@ -7,21 +7,25 @@ body {
 a {
   text-decoration: none;
 }
+#hnav {
+  height: 20vh;
+  display: flex;
+  flex-direction: column;
+}
 /* header */
 header {
-  height: 6rem;
+  flex: 0.7;
   display: flex;
+  align-items: center;
   justify-content: center;
 }
 header h1 {
-  height: 100%;
   text-align: center;
-  line-height: 6rem;
   flex: 0.5;
 }
 /* nav */
 nav {
-  height: 4rem;
+  flex: 0.3;
   display: flex;
   justify-content: space-around;
 }
@@ -31,20 +35,4 @@ nav a {
   text-align: center;
   display: block;
   font-size: 1.2rem;
-}
-/* table */
-table {
-  /* text-align: center; */
-}
-table tr {
-  display: flex;
-  flex-direction: row;
-}
-table tr th {
-  flex: 0.3;
-  align-content: center;
-}
-table tr td {
-  flex: 0.7;
-  align-content: center;
 }

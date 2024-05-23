@@ -19,3 +19,7 @@ class TeacherForm(FlaskForm):
   password2 = PasswordField('비밀번호확인', validators=[DataRequired(message=data_required_msg)])
   point = IntegerField('초기포인트', validators=[DataRequired(message=data_required_msg), NumberRange(min=0, max=100, message='초기포인트는 0 이상 100 이하로 설정하십시오.')])
   name = StringField('성명', validators=[DataRequired(message=data_required_msg)])
+
+class RequestStudents(FlaskForm):
+  grade = IntegerField('학년', validators=[DataRequired(message=data_required_msg), NumberRange(min=1, max=3)])
+  Class = IntegerField('반', validators=[DataRequired(message=data_required_msg)])

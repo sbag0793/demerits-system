@@ -1,0 +1,20 @@
+/* section */
+section {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  height: 100vh;
+}
+section .child {
+  flex: 0.5;
+  background-color: #888888;
+}
+section .left, .right {
+  height: 20vh;
+}
+
+/* table */
+.right table tbody {
+  /* display: flex; */
+  flex-direction: column;
+}
