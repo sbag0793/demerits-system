@@ -14,9 +14,10 @@ class Event(db.Model):
 
 class Teacher(db.Model):
   id = db.Column(db.Integer, primary_key=True)
-  name = db.Column(db.String(30), nullable=False)
+  account = db.Column(db.String(62), nullable=False)
   password = db.Column(db.String(50))
   point = db.Column(db.Integer, nullable=False)
+  name = db.Column(db.String(30), nullable=False)
 
 class Student(db.Model):
   id = db.Column(db.Integer, primary_key=True)

@@ -11,7 +11,7 @@ bp = Blueprint('register', __name__, url_prefix='/register')
 
 @bp.route('/')
 def index():
-  return redirect('register.student')
+  return redirect(url_for('register.student'))
 
 @bp.route('/student', methods=('GET', 'POST'))
 def student():
@@ -28,7 +28,10 @@ def student():
 @bp.route('/teacher', methods=('GET', 'POST'))
 def teacher():
   form = TeacherForm()
-  teacher_list = Student.query.order_by(Teacher.id.desc()).all()
+  if Teacher.query.all():
+    teacher_list = Student.query.order_by(Teacher.id.desc()).all()
+  else:
+    teacher_list = []
 
   if request.method == 'POST' and form.validate_on_submit():
     teacher = Teacher(id=form.id.data, name=form.name.data, password=form.password.data, point=form.point.data)

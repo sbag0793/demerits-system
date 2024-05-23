@@ -6,25 +6,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>main page</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
 </head>
 <body>
   <!-- hnav.onclick(nav 하단 슬라이드 + (header, nav) 백그라운드 동시 변화) -->
-  <div class="container" id="hnav">
-    <header class="container border-bottom bg-light-subtle">
+  <div id="hnav" class="container">
+    <header class="border-bottom bg-light-subtle">
       <h1>Title</h1>
     </header>
-    <nav class="container bg-light">
+    <nav class="bg-light border-bottom border-primary border-5">
       <div class="container"><a href="#" class="text-center">a</a></div>
       <div class="container"><a href="#" class="text-center">b</a></div>
       <div class="container"><a href="#" class="text-center">c</a></div>
       <div class="container"><a href="#" class="text-center">d</a></div>
     </nav>
   </div>
-  <!-- 대쉬보드 -->
-  <div class="container">
-      {% block content %}
-      {% endblock %}
-  </div>
+    {% block content %}
+    {% endblock %}
 </body>
 </html>
