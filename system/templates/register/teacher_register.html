@@ -8,12 +8,12 @@
   </div>
   <div class="register">
     <div class="border left">
-      <form method="post" name="studentAddForm" class="post-form">
+      <form method="post" name="teacherAddForm" class="post-form">
         {{ form.csrf_token }}
         <!-- 폼 에러 알림 -->
-        {% if form.errors %}
+        {% if error_list %}
         <div class="alert alert-danger" role="alert">
-          {% for field, errors in form.errors.items() %}
+          {% for field, errors in error_list.items() %}
           <strong>{{ form[field].label }}</strong>
           <ul>
             {% for error in errors %}
@@ -29,18 +29,24 @@
           <tr class="">
             <th>로그인 ID</th>
             <td>
-              <input type="email" name="account" class="form-control">
+              <input type="text" name="account" class="form-control">
             </td>
           </tr>
           <tr>
-            <th>패스워드</th>
+            <th>비밀번호</th>
             <td>
-              <input type="password" name="password" class="form-control">
+              <input type="password" name="password1" class="form-control">
+            </td>
+          </tr>
+          <tr>
+            <th>비밀번호 재입력</th>
+            <td>
+              <input type="password" name="password2" class="form-control">
             </td>
           </tr>
           <tr>
             <th>초기 포인트</th>
-            <td><input type="number" name="number" class="form-control"></td>
+            <td><input type="number" name="point" class="form-control"></td>
           </tr>
           <tr>
             <th>성명</th>

@@ -32,3 +32,19 @@ nav a {
   display: block;
   font-size: 1.2rem;
 }
+/* table */
+table {
+  /* text-align: center; */
+}
+table tr {
+  display: flex;
+  flex-direction: row;
+}
+table tr th {
+  flex: 0.3;
+  align-content: center;
+}
+table tr td {
+  flex: 0.7;
+  align-content: center;
+}

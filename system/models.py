@@ -1,5 +1,7 @@
 from system import db
 
+
+
 # 데이터 입력 시 외래키는 입력 X, 해당하는 객체만 입력
 class Event(db.Model):
   id = db.Column(db.Integer, primary_key=True)
@@ -14,7 +16,7 @@ class Event(db.Model):
 
 class Teacher(db.Model):
   id = db.Column(db.Integer, primary_key=True)
-  account = db.Column(db.String(62), nullable=False)
+  account = db.Column(db.String(62), nullable=False, unique=True)
   password = db.Column(db.String(50))
   point = db.Column(db.Integer, nullable=False)
   name = db.Column(db.String(30), nullable=False)

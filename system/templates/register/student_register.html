@@ -11,9 +11,9 @@
       <form method="post" name="studentAddForm" class="post-form">
         {{ form.csrf_token }}
         <!-- 폼 에러 알림 -->
-        {% if form.errors %}
+        {% if error_list %}
         <div class="alert alert-danger" role="alert">
-          {% for field, errors in form.errors.items() %}
+          {% for field, errors in error_list.items() %}
           <strong>{{ form[field].label }}</strong>
           <ul>
             {% for error in errors %}
@@ -27,7 +27,7 @@
         <!-- 학생 등록 테이블 -->
         <table class="table text-center">
           <tr class="">
-            <th>grade</th>
+            <th>학년</th>
             <td>
               <select name="grade" class="form-select">
                 <option value="1">1학년</option>
@@ -37,7 +37,7 @@
             </td>
           </tr>
           <tr>
-            <th>class</th>
+            <th>반</th>
             <td>
               <select name="Class" class="form-select">
                 <option value="1">1반</option>
@@ -54,11 +54,11 @@
             </td>
           </tr>
           <tr>
-            <th>number</th>
+            <th>번호</th>
             <td><input type="number" name="number" class="form-control"></td>
           </tr>
           <tr>
-            <th>name</th>
+            <th>성명</th>
             <td><input type="text" name="name" class="form-control"></td>
           </tr>
         </table>
@@ -79,19 +79,22 @@
         </thead>
         <tbody class="table-group-divider">
           {% if student_list %}
-          {% for student in student_list %}
-          <tr>
-            <th scope="row">{{ loop.revindex }}</th>
-            <td>{{ student.grade }}학년</td>
-            <td>{{ student.Class }}반</td>
-            <td>{{ student.number }}번</td>
-            <td>{{ student.name }}</td>
-          </tr>
-          {% endfor %}
+            {% for student in student_list %}
+              {% if loop.index > 10 %}
+                {% break %}
+              {% endif %}
+              <tr>
+                <th scope="row">{{ loop.revindex }}</th>
+                <td>{{ student.grade }}학년</td>
+                <td>{{ student.Class }}반</td>
+                <td>{{ student.number }}번</td>
+                <td>{{ student.name }}</td>
+              </tr>
+            {% endfor %}
           {% else %}
-          <tr>
-            <td colspan="6" class="text-body-secondary">등록된 학생이 없습니다.</td>
-          </tr>
+            <tr>
+              <td colspan="6" class="text-body-secondary">등록된 학생이 없습니다.</td>
+            </tr>
           {% endif %}
         </tbody>
       </table>
