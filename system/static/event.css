@@ -1,13 +1,50 @@
 /* section */
+/* section */
 section {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-content: center;
   justify-content: space-around;
+  height: 80vh;
+  margin-top: 3vh;
 }
-section .child {
-  flex: 0.4;
+section .search, .grant {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
 }
-section .left, .right {
-  height: 20vh;
+.search {
+  flex: 0.7;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.grant {
+  flex: 0.3;
+}
+/* search */
+.search > form {
+  flex: 0.4
+}
+.search > table {
+  flex: 0.6
+}
+/* form */
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 20%;
+}
+table tr {
+  display: flex;
+  flex-direction: row;
+}
+table tr th {
+  flex: 0.3;
+  align-content: center;
+}
+table tr td {
+  flex: 0.7;
+  align-content: center;
 }

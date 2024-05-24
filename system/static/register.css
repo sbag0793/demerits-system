@@ -42,9 +42,6 @@ table .form-control, .form-select {
   height: 4vh;
 }
 /* table */
-table {
-  /* text-align: center; */
-}
 table tr {
   display: flex;
   flex-direction: row;

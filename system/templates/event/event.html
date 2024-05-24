@@ -1,44 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
-{{a}}
+<!-- {{a}} -->
 <link rel="stylesheet" href="{{ url_for('static', filename='event.css') }}">
 <section class="container">
-  <div class="child left">
-    <form method="post" name="scoreForm" class="post-form child">
-      <div class="left">
-        <!-- Type -->
-        <div class="Type mb-3">
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="Type" id="typeRadio1" value="상점">
-            <label class="form-check-label" for="typeRadio1">상점</label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="Type" id="typeRadio2" value="벌점">
-            <label class="form-check-label" for="typeRadio2">벌점</label>
-          </div>
-        </div>
-        <!-- score -->
-        <div class="score form-floating mb-3">
-          <input type="number" class="form-control" name="score" id="scoreNumber" placeholder="score">
-          <label for="scoreNumber">부여할 점수</label>
-        </div>
-        <!-- reason -->
-        <div class="reason mb-3">
-          <select class="form-select" id="reasonSelect">
-            {% for reason in reason_list %}
-              <option value="{{ loop.index }}">{{ reason }}</option>
-            {% endfor %}
-          </select>
-        </div>
-        <!-- submit -->
-        <input type="submit" class="form-control btn btn-primary" name="requestStudents" value="학생 검색">
-      </div>
-    </form>
-  </div>
-  <div class="child right">
+  <div class="child search">
     <form method="post" name="studentSelectForm" class="post-form">
       <!-- student -->
-      <div class="grade mb-3">
+      <div class="grade">
         <select class="form-select" id="studentSelect" name="grade">
           <option value=1>1학년</option>
           <option value=2>2학년</option>
@@ -46,7 +14,7 @@
         </select>
       </div>
       <!-- Class -->
-      <div class="Class form-floating mb-3">
+      <div class="Class form-floating">
         <input type="number" name="Class" class="form-control" id="ClassInput" placeholder="Class">
         <label for="ClassInput">반</label>
       </div>
@@ -81,6 +49,36 @@
         {% endif %}
       </tbody>
     </table>
+  </div>
+  <div class="child grant">
+    <form method="post" name="scoreForm" class="post-form child">
+      <!-- type -->
+      <div class="type">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="positive" id="typeRadio1" value=True>
+          <label class="form-check-label" for="typeRadio1">상점</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name='negative' id="typeRadio2" value=True>
+          <label class="form-check-label" for="typeRadio2">벌점</label>
+        </div>
+      </div>
+      <!-- score -->
+      <div class="score form-floating">
+        <input type="number" class="form-control" name="score" id="scoreNumber" placeholder="score">
+        <label for="scoreNumber">부여할 점수</label>
+      </div>
+      <!-- reason -->
+      <div class="reason">
+        <select class="form-select" id="reasonSelect">
+          {% for reason in reason_list %}
+            <option value="{{ loop.index }}">{{ reason }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <!-- submit -->
+      <input type="submit" class="form-control btn btn-primary" name="requestStudents" value="학생 검색">
+    </form>
   </div>
 </section>
 {% endblock %}

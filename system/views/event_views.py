@@ -3,7 +3,7 @@ import logging
 
 from flask import Blueprint, render_template, redirect, url_for, request
 from system import db
-from system.models import Student
+from system.models import Student, Event
 from system.forms import RequestStudents
 # from system.forms import 
 
