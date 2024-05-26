@@ -3,8 +3,8 @@ import logging
 
 from flask import Blueprint, render_template, redirect, url_for, request
 from system import db
-from system.models import Student, Event
-from system.forms import RequestStudents
+from system.models import Student, Event, Teacher
+from system.forms import RequestStudents, GrantScore
 # from system.forms import 
 
 bp = Blueprint('event', __name__, url_prefix='/event')
@@ -21,11 +21,27 @@ reason_list = [
 @bp.route('/', methods=('GET', 'POST'))
 def index():
   form = RequestStudents()
-  if request.method == 'POST':
+  if request.method == 'POST' and 'requestStudents' in request.form:
+    error_list = form.errors
     student_list = Student.query.filter_by(
       grade=form.grade.data,
       Class=form.Class.data
     ).all()
-    return render_template('event/event.html', reason_list=reason_list, student_list=student_list, a=form.validate_on_submit())
+    return render_template('event/event.html', reason_list=reason_list, student_list=student_list, error_list=error_list)
+  elif request.method == 'POST' and 'grantScore' in request.form:
+    error_list = form.errors
+    form = GrantScore()
+    event = Event(
+      _type = bool(form.type.data),
+      score = form.score.data,
+      reason = int(form.reason.data),
+      teacher = Teacher.query.get(form.teacher.data),
+      student = Student.query.get(form.student.data),
+      event_date = datetime.now()
+    )
+    db.session.add(event)
+    db.session.commit()
+    return redirect(url_for('event.index'))
   else:
-    return render_template('event/event.html', reason_list=reason_list, form=form, a=form.validate_on_submit())
+    error_list = []
+    return render_template('event/event.html', reason_list=reason_list, form=form, a=form.validate_on_submit(), error_list=error_list)

@@ -1,50 +1,21 @@
-/* section */
-/* section */
 section {
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  justify-content: space-around;
-  height: 80vh;
-  margin-top: 3vh;
-}
-section .search, .grant {
-  height: 100%;
-  display: flex;
-  flex-direction: row;
-}
-.search {
-  flex: 0.7;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-}
-.grant {
-  flex: 0.3;
+  height: 60vh;
 }
 /* search */
-.search > form {
-  flex: 0.4
-}
-.search > table {
-  flex: 0.6
-}
-/* form */
-form {
+.search {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 20%;
-}
-table tr {
-  display: flex;
+  height: 30vh;
   flex-direction: row;
+  justify-content: space-evenly;
+  padding-top: 3vh;
 }
-table tr th {
+.search .form {
   flex: 0.3;
-  align-content: center;
 }
-table tr td {
-  flex: 0.7;
-  align-content: center;
+.search .table {
+  flex: 0.6;
 }
+.search form > input {
+  margin-top: 3vh;
+}
+/* grant */

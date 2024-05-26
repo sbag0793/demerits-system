@@ -41,16 +41,3 @@ table .form-control, .form-select {
 .right table tr {
   height: 4vh;
 }
-/* table */
-table tr {
-  display: flex;
-  flex-direction: row;
-}
-table tr th {
-  flex: 0.3;
-  align-content: center;
-}
-table tr td {
-  flex: 0.7;
-  align-content: center;
-}

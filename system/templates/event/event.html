@@ -1,65 +1,75 @@
 {% extends 'base.html' %}
 {% block content %}
-<!-- {{a}} -->
+{{ a, error_list }}
 <link rel="stylesheet" href="{{ url_for('static', filename='event.css') }}">
 <section class="container">
   <div class="child search">
-    <form method="post" name="studentSelectForm" class="post-form">
-      <!-- student -->
-      <div class="grade">
-        <select class="form-select" id="studentSelect" name="grade">
-          <option value=1>1학년</option>
-          <option value=2>2학년</option>
-          <option value=3>3학년</option>
-        </select>
-      </div>
-      <!-- Class -->
-      <div class="Class form-floating">
-        <input type="number" name="Class" class="form-control" id="ClassInput" placeholder="Class">
-        <label for="ClassInput">반</label>
-      </div>
-      <!-- submit -->
-      <input type="submit" class="form-control btn btn-primary" name="requestStudents" value="학생 검색">
-    </form>
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">grade</th>
-          <th scope="col">class</th>
-          <th scope="col">number</th>
-          <th scope="col">name</th>
-        </tr>
-      </thead>
-      <tbody class="table-group-divider">
-        {% if student_list %}
-          {% for student in student_list %}
-            <tr>
-              <th scope="row">{{ loop.revindex }}</th>
-              <td>{{ student.grade }}학년</td>
-              <td>{{ student.Class }}반</td>
-              <td>{{ student.number }}번</td>
-              <td>{{ student.name }}</td>
-            </tr>
-          {% endfor %}
-          {% else %}
+    <div class="form">
+      <form method="post" class="post-form" name="studentSelectForm">
+        <input type="hidden" name="student" value=""> 
+        <!-- student -->
+        <div class="gradeclass">
+          <div class="grade">
+            <select class="form-select" id="studentSelect" name="grade">
+              <option value=1>1학년</option>
+              <option value=2>2학년</option>
+              <option value=3>3학년</option>
+            </select>
+          </div>
+          <!-- Class -->
+          <div class="Class form-floating">
+            <input type="number" name="Class" class="form-control" id="ClassInput" placeholder="Class">
+            <label for="ClassInput">반</label>
+          </div>
+        </div>
+        <!-- submit -->
+        <input type="submit" class="form-control btn btn-primary" name="requestStudents" value="학생 검색">
+      </form>
+    </div>
+    <div class="table">
+      <table class="table">
+        <thead>
           <tr>
-            <td colspan="5" class="text-body-secondary">검색된 학생이 없습니다.</td>
+            <th scope="col">#</th>
+            <th scope="col">grade</th>
+            <th scope="col">class</th>
+            <th scope="col">number</th>
+            <th scope="col">name</th>
           </tr>
-        {% endif %}
-      </tbody>
-    </table>
+        </thead>
+        <tbody class="table-group-divider">
+          {% if student_list %}
+            {% for student in student_list %}
+              <tr>
+                <th scope="row">{{ loop.revindex }}</th>
+                <td>{{ student.grade }}학년</td>
+                <td>{{ student.Class }}반</td>
+                <td>{{ student.number }}번</td>
+                <td>{{ student.name }}</td>
+              </tr>
+            {% endfor %}
+            {% else %}
+            <tr>
+              <td colspan="5" class="text-body-secondary">검색된 학생이 없습니다.</td>
+            </tr>
+          {% endif %}
+        </tbody>
+      </table>
+    </div>
   </div>
   <div class="child grant">
     <form method="post" name="scoreForm" class="post-form child">
+      <!-- variables -->
+      <input type="hidden" name="teacher" value="1">
+      <input type="hidden" name="student" value="1">
       <!-- type -->
       <div class="type">
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="positive" id="typeRadio1" value=True>
+          <input class="form-check-input" type="radio" name="type" id="typeRadio1" value="True">
           <label class="form-check-label" for="typeRadio1">상점</label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="radio" name='negative' id="typeRadio2" value=True>
+          <input class="form-check-input" type="radio" name='type' id="typeRadio2" value="False">
           <label class="form-check-label" for="typeRadio2">벌점</label>
         </div>
       </div>
@@ -70,14 +80,14 @@
       </div>
       <!-- reason -->
       <div class="reason">
-        <select class="form-select" id="reasonSelect">
+        <select class="form-select" id="reasonSelect" name="reason">
           {% for reason in reason_list %}
             <option value="{{ loop.index }}">{{ reason }}</option>
           {% endfor %}
         </select>
       </div>
       <!-- submit -->
-      <input type="submit" class="form-control btn btn-primary" name="requestStudents" value="학생 검색">
+      <input type="submit" class="form-control btn btn-primary" name="grantScore" value="점수 부여">
     </form>
   </div>
 </section>

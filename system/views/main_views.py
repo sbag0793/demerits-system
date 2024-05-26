@@ -1,8 +1,10 @@
-from flask import Blueprint, render_template, redirect, url_for
+from flask import Blueprint, render_template, redirect, url_for, request
+from system.models import Event
 
 bp = Blueprint('main', __name__, url_prefix='/')
 
 
-@bp.route('/')
+@bp.route('/', methods=('POST', 'GET'))
 def index():
-  return render_template('main/index.html', test='test')
+  event_list = Event.query.all()
+  return render_template('main/index.html', event_list=event_list)

@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField, TextAreaField, PasswordField
+from wtforms import StringField, IntegerField, TextAreaField, PasswordField, BooleanField, FormField, DateTimeField, HiddenField, RadioField, SelectField
 from wtforms.validators import DataRequired, NumberRange, Length, EqualTo
 
 data_required_msg = '데이터를 작성해주십시오.'
@@ -23,3 +23,11 @@ class TeacherForm(FlaskForm):
 class RequestStudents(FlaskForm):
   grade = IntegerField('학년', validators=[DataRequired(message=data_required_msg), NumberRange(min=1, max=3)])
   Class = IntegerField('반', validators=[DataRequired(message=data_required_msg)])
+
+class GrantScore(FlaskForm):
+  type = RadioField('Type', choices=[('True', '상점'), ('False', '벌점')], validators=[DataRequired(message=data_required_msg)])
+  score = IntegerField('점수', validators=[DataRequired(message=data_required_msg)])
+  reason = SelectField('Reason', choices=[], validators=[DataRequired(message=data_required_msg)])
+  teacher = HiddenField('Teacher', validators=[DataRequired(message=data_required_msg)])
+  student = HiddenField('Student', validators=[DataRequired(message=data_required_msg)])
+  event_date = DateTimeField('날짜')

@@ -36,3 +36,11 @@ nav a {
   display: block;
   font-size: 1.2rem;
 }
+/* table */
+table tr {
+  display: flex;
+  flex-direction: row;
+}
+tr > * {
+  flex: 1;
+}
