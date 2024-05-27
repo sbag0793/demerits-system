@@ -32,6 +32,35 @@
       });
     });
   });
+  document.getElementById('grantScore').addEventListener('click', function(event) {
+    event.preventDefault();
+
+    const form = document.getElementById('scoreForm');
+    const formData = new FormData(form);
+
+    const data = {
+      teacherId: formData.get('teacherId'),
+      studentIds: selectedStudents,
+      type: formData.get('studentId'),
+      score: formData.get('studentId'),
+      reason: formData.get('studentId'),
+      };
+
+    fetch('/event', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+        },
+      body: JSON.stringify(data)
+    })
+      .then(response => response.json())
+      .then(data => {
+          console.log('Success:', data);
+        })
+      .catch((error) => {
+          console.error('Error:', error);
+        });
+  });
 </script>
 <link rel="stylesheet" href="{{ url_for('static', filename='event.css') }}">
 <section class="container">
@@ -130,8 +159,8 @@
   <div class="child grant">
     <form method="post" name="scoreForm" class="post-form child">
       <!-- variables -->
-      <input type="hidden" name="teacher" value="1">
-      <input type="hidden" name="student" value="1">
+      <input type="hidden" name="teacherId" value="1">
+      <input type="hidden" name="studentIds" value="1">
       <!-- type -->
       <div class="type">
         <div class="form-check">
@@ -157,7 +186,7 @@
         </select>
       </div>
       <!-- submit -->
-      <input type="submit" class="form-control btn btn-primary" name="grantScore" value="점수 부여">
+      <input type="submit" class="form-control btn btn-primary" name="grantScore" value="점수 부여" id="grantScore">
     </form>
   </div>
 </section>

@@ -37,8 +37,8 @@ def index():
       _type = bool(form.type.data),
       score = form.score.data,
       reason = int(form.reason.data),
-      teacher = Teacher.query.get(form.teacher.data),
-      student = Student.query.get(form.student.data),
+      teacher = Teacher.query.get(form.teacherId.data),
+      student = Student.query.get(form.studentId.data),
       event_date = datetime.now()
     )
     db.session.add(event)
