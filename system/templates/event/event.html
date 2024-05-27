@@ -1,32 +1,102 @@
 {% extends 'base.html' %}
 {% block content %}
 {{ a, error_list }}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.student_child').forEach(function(student) {
+      student.addEventListener('click', function(event) {
+        event.preventDefault();
+
+// 이미 클릭된 학생이면 아무 작업도 하지 않음
+        if (this.classList.contains('disabled')) {
+          return;
+        }
+
+        const studentName = this.getAttribute('data-name');
+        const studentId = this.getAttribute('data-id');
+        // 확인용 콘솔 로그
+        console.log('studentName:', studentName);
+        console.log('studentId:', studentId);
+        
+        const listItem = document.createElement('div');
+        listItem.textContent = studentName;
+        document.getElementById('addStudents').appendChild(listItem);
+        const studentList = document.querySelector('#addStudents');
+        if (studentList) {
+          studentList.appendChild(listItem);
+          // 학생 행을 비활성화 상태로 만듦
+          this.classList.add('disabled');
+        } else {
+          console.error('Student list not found');
+        }
+      });
+    });
+  });
+</script>
 <link rel="stylesheet" href="{{ url_for('static', filename='event.css') }}">
 <section class="container">
   <div class="child search">
-    <div class="form">
-      <form method="post" class="post-form" name="studentSelectForm">
-        <input type="hidden" name="student" value=""> 
-        <!-- student -->
-        <div class="gradeclass">
-          <div class="grade">
-            <select class="form-select" id="studentSelect" name="grade">
-              <option value=1>1학년</option>
-              <option value=2>2학년</option>
-              <option value=3>3학년</option>
-            </select>
+    <div class="left">
+      <div class="form">
+        <form method="post" class="post-form" name="studentSelectForm">
+          <input type="hidden" name="student" value=""> 
+          <!-- student -->
+          <div class="gradeclass">
+            <div class="grade">
+              <select class="form-select" id="studentSelect" name="grade">
+                <option value=1>1학년</option>
+                <option value=2>2학년</option>
+                <option value=3>3학년</option>
+              </select>
+            </div>
+            <!-- Class -->
+            <div class="Class form-floating">
+              <input type="number" name="Class" class="form-control" id="ClassInput" placeholder="Class">
+              <label for="ClassInput">반</label>
+            </div>
           </div>
-          <!-- Class -->
-          <div class="Class form-floating">
-            <input type="number" name="Class" class="form-control" id="ClassInput" placeholder="Class">
-            <label for="ClassInput">반</label>
-          </div>
-        </div>
-        <!-- submit -->
-        <input type="submit" class="form-control btn btn-primary" name="requestStudents" value="학생 검색">
-      </form>
+          <!-- submit -->
+          <input type="submit" class="form-control btn btn-primary" name="requestStudents" value="학생 검색">
+        </form>
+      </div>
+      <div id="addStudents">
+
+      </div>
     </div>
-    <div class="table">
+    <div class="border viewer right">
+      <table class="table">
+        <thead>
+          <tr>
+            <a href=""><th scope="col">#</th></a>
+            <th scope="col">grade</th>
+            <th scope="col">class</th>
+            <th scope="col">number</th>
+            <th scope="col">name</th>
+          </tr>
+        </thead>
+        <tbody class="table-group-divider">
+          {% if student_list %}
+            {% for student in student_list %}
+              {% if loop.index > 10 %}
+                {% break %}
+              {% endif %}
+              <tr>
+                <th scope="row">{{ loop.revindex }}</th>
+                <td>{{ student.grade }}학년</td>
+                <td>{{ student.Class }}반</td>
+                <td>{{ student.number }}번</td>
+                <td><a class="student_child" href="/event" data-name="{{ student.name }}" data-id="{{ loop.index }}">{{ student.name }}</a></td>
+              </tr>
+            {% endfor %}
+          {% else %}
+            <tr>
+              <td colspan="5" class="text-body-secondary">등록된 학생이 없습니다.</td>
+            </tr>
+          {% endif %}
+        </tbody>
+      </table>
+    </div>
+    <!-- <div class="table">
       <table class="table">
         <thead>
           <tr>
@@ -55,7 +125,7 @@
           {% endif %}
         </tbody>
       </table>
-    </div>
+    </div> -->
   </div>
   <div class="child grant">
     <form method="post" name="scoreForm" class="post-form child">

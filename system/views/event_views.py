@@ -21,6 +21,7 @@ reason_list = [
 @bp.route('/', methods=('GET', 'POST'))
 def index():
   form = RequestStudents()
+  # 학생 검색
   if request.method == 'POST' and 'requestStudents' in request.form:
     error_list = form.errors
     student_list = Student.query.filter_by(
@@ -28,6 +29,7 @@ def index():
       Class=form.Class.data
     ).all()
     return render_template('event/event.html', reason_list=reason_list, student_list=student_list, error_list=error_list)
+  # 이벤트 생성
   elif request.method == 'POST' and 'grantScore' in request.form:
     error_list = form.errors
     form = GrantScore()
@@ -42,6 +44,7 @@ def index():
     db.session.add(event)
     db.session.commit()
     return redirect(url_for('event.index'))
+  # GET 요청
   else:
     error_list = []
     return render_template('event/event.html', reason_list=reason_list, form=form, a=form.validate_on_submit(), error_list=error_list)

@@ -1,21 +1,50 @@
 section {
   height: 60vh;
 }
+/* addStudents */
+#addStudents {
+  display: flex;
+  /* justify-content: space-between; */
+  margin-top: 2vh;
+  flex-wrap: wrap;
+}
+#addStudents > div {
+  flex: 0.2;
+  text-align: center;
+  padding: 2vh;
+  margin: 1vh;
+  border: 1px solid;
+}
+.disabled {
+  color: black;
+  cursor: default;
+}
 /* search */
 .search {
   display: flex;
-  height: 30vh;
+  height: 44vh;
   flex-direction: row;
   justify-content: space-evenly;
   padding-top: 3vh;
 }
-.search .form {
+.search .left {
   flex: 0.3;
 }
-.search .table {
+.search .viewer {
   flex: 0.6;
 }
 .search form > input {
   margin-top: 3vh;
+}
+/* viewer */
+.viewer thead {
+  height: 4vh;
+}
+.viewer tbody {
+  height: 40vh;
+  overflow: hidden;
+}
+.viewer tbody tr {
+  height: 4vh;
 }
 /* grant */
