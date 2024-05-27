@@ -30,9 +30,10 @@ def create_app():
   from . import models
 
   # Blueprint
-  from .views import main_views, regist_views, event_views
+  from .views import main_views, regist_views, event_views, chart_views
   app.register_blueprint(main_views.bp)
   app.register_blueprint(regist_views.bp)
   app.register_blueprint(event_views.bp)
+  app.register_blueprint(chart_views.bp)
 
   return app
