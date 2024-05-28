@@ -1,25 +1,15 @@
 section .main_table {
   height: 44vh;
-  text-align: center;
-}
-section .main_table thead {
-  height: 4vh;
-  text-align: start;
-}
-section .main_table tbody {
-  height: 40vh;
   overflow: hidden;
-}
-/* table */
-/* table tr {
   display: flex;
-  flex-direction: row;
+  justify-content: center;
 }
-table tr th {
-  flex: 0.3;
-  align-content: center;
+section .main_table table {
+  width: 70%;
 }
-table tr td {
-  flex: 0.7;
-  align-content: center;
-} */
+section .main_table thead tr {
+  height: 4vh;
+}
+section .main_table tbody tr {
+  height: 4vh;
+}

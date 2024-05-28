@@ -1,6 +1,3 @@
-section {
-  height: 60vh;
-}
 /* addStudents */
 #addStudents {
   display: flex;
@@ -9,7 +6,6 @@ section {
   flex-wrap: wrap;
 }
 #addStudents > div {
-  flex: 0.2;
   text-align: center;
   padding: 2vh;
   margin: 1vh;
@@ -25,7 +21,7 @@ section {
   height: 44vh;
   flex-direction: row;
   justify-content: space-evenly;
-  padding-top: 3vh;
+  margin-top: 3vh;
 }
 .search .left {
   flex: 0.3;
@@ -33,8 +29,9 @@ section {
 .search .viewer {
   flex: 0.6;
 }
-.search form > input {
+form > input {
   margin-top: 3vh;
+  width: 80%;
 }
 /* viewer */
 .viewer thead {
@@ -47,4 +44,13 @@ section {
 .viewer tbody tr {
   height: 4vh;
 }
+/* table */
+.search table tr {
+  height: 4vh;
+}
 /* grant */
+.grant {
+  margin-top: 5vh;
+  width: 50%;
+  float: right;
+}

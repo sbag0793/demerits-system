@@ -2,39 +2,43 @@
 {% block content %}
 <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
 <section class="container">
-  <table class="table main_table">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">positive</th>
-        <th scope="col">negative</th>
-        <th scope="col">score</th>
-        <th scope="col">reason</th>
-        <th scope="col">from</th>
-        <th scope="col">to</th>
-        <th scope="col">date</th>
-      </tr>
-    </thead>
-    <tbody class="table-group-divider">
-      {% if event_list %}
-      {% for event in event_list %}
-      <tr>
-        <th scope="row">{{ loop.revindex }}</th>
-        <td>{{ event.positive }}</td>
-        <td>{{ event.negative }}</td>
-        <td>{{ event.score }}</td>
-        <td>{{ event.reason }}</td>
-        <td>{{ event.teacher.name }}</td>
-        <td>{{ event.student.name }}</td>
-        <td>{{ event.event_date }}</td>
-      </tr>
-      {% endfor %}
-      {% else %}
-      <tr>
-        <td colspan="7" style="line-height: 20rem;" class="text-body-secondary">이벤트가 발생하지 않았습니다.</td>
-      </tr>
-      {% endif %}
-    </tbody>
-  </table>
+  <div class="main_table">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">type</th>
+          <th scope="col">score</th>
+          <th scope="col">reason</th>
+          <th scope="col">from</th>
+          <th scope="col">to</th>
+          <th scope="col">date</th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+        {% if event_list %}
+          {% for event in event_list %}
+            <tr>
+              <th scope="row">{{ loop.revindex }}</th>
+              {% if event._type %}
+                <td>상점</td>
+              {% else %}
+                <td>벌점</td>
+              {% endif %}
+              <td>{{ event.score }}</td>
+              <td>{{ event.reason }}</td>
+              <td>{{ event.teacher.name }}</td>
+              <td>{{ event.student.name }}</td>
+              <td>{{ event.event_date.strftime('%Y-%m-%d') }}</td>
+            </tr>
+          {% endfor %}
+        {% else %}
+          <tr style="height: 39vh;">
+            <td colspan="7" style="line-height: 39vh;" class="text-body-secondary text-center">이벤트가 발생하지 않았습니다.</td>
+          </tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
 </section>
 {% endblock %}

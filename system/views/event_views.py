@@ -1,5 +1,5 @@
 from datetime import datetime
-import logging
+import json
 
 from flask import Blueprint, render_template, redirect, url_for, request
 from system import db
@@ -28,23 +28,28 @@ def index():
       grade=form.grade.data,
       Class=form.Class.data
     ).all()
-    return render_template('event/event.html', reason_list=reason_list, student_list=student_list, error_list=error_list)
+    return render_template('event/event.html', reason_list=reason_list, student_list=student_list)
   # 이벤트 생성
   elif request.method == 'POST' and 'grantScore' in request.form:
     error_list = form.errors
     form = GrantScore()
-    event = Event(
-      _type = bool(form.type.data),
-      score = form.score.data,
-      reason = int(form.reason.data),
-      teacher = Teacher.query.get(form.teacherId.data),
-      student = Student.query.get(form.studentId.data),
-      event_date = datetime.now()
-    )
-    db.session.add(event)
+    studentIds = json.loads(form.studentIds.data)
+    now = datetime.now()
+    # formatted_date = now.strftime('%Y-%m-%d')
+
+    for studentId in studentIds:
+      event = Event(
+        _type = int(form.type.data),
+        score = form.score.data,
+        reason = int(form.reason.data),
+        teacher = Teacher.query.get(form.teacherId.data),
+        student = Student.query.get(studentId['id']),
+        event_date = now
+      )
+      db.session.add(event)
     db.session.commit()
     return redirect(url_for('event.index'))
   # GET 요청
   else:
     error_list = []
-    return render_template('event/event.html', reason_list=reason_list, form=form, a=form.validate_on_submit(), error_list=error_list)
+    return render_template('event/event.html', reason_list=reason_list, form=form)

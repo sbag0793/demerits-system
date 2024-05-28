@@ -8,6 +8,19 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
 </head>
+
+<script>
+  function changeColor(element) {
+    // 호버 상태로 클래스 변경
+    element.classList.add('hover-color');
+  }
+
+  function restoreColor(element) {
+    // 초기 상태로 클래스 복원
+    element.classList.remove('hover-color');
+  }
+</script>
+
 <body>
   <!-- hnav.onclick(nav 하단 슬라이드 + (header, nav) 백그라운드 동시 변화) -->
   <div id="hnav" class="container">
@@ -15,10 +28,17 @@
       <h1>Title</h1>
     </header>
     <nav class="bg-light border-bottom border-primary border-5">
-      <div class="container"><a href="{{ url_for('register.index') }}" class="text-center">등록</a></div>
-      <div class="container"><a href="{{ url_for('event.index') }}" class="text-center">부여</a></div>
-      <div class="container"><a href="#" class="text-center">c</a></div>
-      <div class="container"><a href="#" class="text-center">d</a></div>
+      <div class="container">
+        <a href="{{ url_for('register.index') }}" class="text-center" onmouseover="changeColor(this)" onmouseout="restoreColor(this)">등록</a>
+      </div>
+      <div class="container">
+        <a href="{{ url_for('event.index') }}" class="text-center" onmouseover="changeColor(this)" onmouseout="restoreColor(this)">부여</a>
+      </div>
+      <div class="container">
+        <a href="#" class="text-center" onmouseover="changeColor(this)" onmouseout="restoreColor(this)">--개발중--</a>
+      </div>
+      <div class="container" onmouseover="changeColor(this)" onmouseout="restoreColor(this)"><a href="{{ url_for('main.index') }}" class="text-center">홈으로</a>
+      </div>
     </nav>
   </div>
     {% block content %}

@@ -48,3 +48,7 @@ table tr {
 tr > * {
   flex: 1;
 }
+.hover-color {
+  background-color: rgb(228, 228, 228);
+  transition: background-color 0.3s ease;
+}

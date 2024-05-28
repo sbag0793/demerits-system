@@ -28,6 +28,6 @@ class GrantScore(FlaskForm):
   type = RadioField('Type', choices=[('True', '상점'), ('False', '벌점')], validators=[DataRequired(message=data_required_msg)])
   score = IntegerField('점수', validators=[DataRequired(message=data_required_msg)])
   reason = SelectField('Reason', choices=[], validators=[DataRequired(message=data_required_msg)])
-  teacher = HiddenField('Teacher', validators=[DataRequired(message=data_required_msg)])
-  student = HiddenField('Student', validators=[DataRequired(message=data_required_msg)])
+  teacherId = HiddenField('Teacher', validators=[DataRequired(message=data_required_msg)])
+  studentIds = HiddenField('Student', validators=[DataRequired(message=data_required_msg)])
   event_date = DateTimeField('날짜')

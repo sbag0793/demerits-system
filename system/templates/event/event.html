@@ -1,27 +1,33 @@
 {% extends 'base.html' %}
 {% block content %}
-{{ a, error_list }}
 <script>
   document.addEventListener('DOMContentLoaded', function() {
+    const selectedStudents = [];
     document.querySelectorAll('.student_child').forEach(function(student) {
       student.addEventListener('click', function(event) {
         event.preventDefault();
 
-// 이미 클릭된 학생이면 아무 작업도 하지 않음
+        // 이미 클릭된 학생이면 아무 작업도 하지 않음
         if (this.classList.contains('disabled')) {
           return;
         }
 
+        // 디스플레이를 위한 이름과 POST를 위한 id 저장
         const studentName = this.getAttribute('data-name');
         const studentId = this.getAttribute('data-id');
-        // 확인용 콘솔 로그
-        console.log('studentName:', studentName);
-        console.log('studentId:', studentId);
+
+        selectedStudents.push({ id: studentId });
+        const jsonSelectedStudents = JSON.stringify(selectedStudents);
+        const studentIdsValue = document.querySelector('#studentIds');
+        studentIdsValue.value = jsonSelectedStudents;
         
         const listItem = document.createElement('div');
         listItem.textContent = studentName;
         document.getElementById('addStudents').appendChild(listItem);
         const studentList = document.querySelector('#addStudents');
+
+        console.log(selectedStudents)
+
         if (studentList) {
           studentList.appendChild(listItem);
           // 학생 행을 비활성화 상태로 만듦
@@ -31,35 +37,6 @@
         }
       });
     });
-  });
-  document.getElementById('grantScore').addEventListener('click', function(event) {
-    event.preventDefault();
-
-    const form = document.getElementById('scoreForm');
-    const formData = new FormData(form);
-
-    const data = {
-      teacherId: formData.get('teacherId'),
-      studentIds: selectedStudents,
-      type: formData.get('studentId'),
-      score: formData.get('studentId'),
-      reason: formData.get('studentId'),
-      };
-
-    fetch('/event', {
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/json'
-        },
-      body: JSON.stringify(data)
-    })
-      .then(response => response.json())
-      .then(data => {
-          console.log('Success:', data);
-        })
-      .catch((error) => {
-          console.error('Error:', error);
-        });
   });
 </script>
 <link rel="stylesheet" href="{{ url_for('static', filename='event.css') }}">
@@ -92,6 +69,7 @@
 
       </div>
     </div>
+    <!-- table -->
     <div class="border viewer right">
       <table class="table">
         <thead>
@@ -114,61 +92,31 @@
                 <td>{{ student.grade }}학년</td>
                 <td>{{ student.Class }}반</td>
                 <td>{{ student.number }}번</td>
-                <td><a class="student_child" href="/event" data-name="{{ student.name }}" data-id="{{ loop.index }}">{{ student.name }}</a></td>
+                <td><a class="student_child" href="/event" data-name="{{ student.name }}" data-id="{{ student.id }}">{{ student.name }}</a></td>
               </tr>
             {% endfor %}
           {% else %}
-            <tr>
-              <td colspan="5" class="text-body-secondary">등록된 학생이 없습니다.</td>
+            <tr style="height: 40vh;">
+              <td colspan="5" style="line-height: 36vh;" class="text-body-secondary text-center">검색된 학생이 없습니다.</td>
             </tr>
           {% endif %}
         </tbody>
       </table>
     </div>
-    <!-- <div class="table">
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">grade</th>
-            <th scope="col">class</th>
-            <th scope="col">number</th>
-            <th scope="col">name</th>
-          </tr>
-        </thead>
-        <tbody class="table-group-divider">
-          {% if student_list %}
-            {% for student in student_list %}
-              <tr>
-                <th scope="row">{{ loop.revindex }}</th>
-                <td>{{ student.grade }}학년</td>
-                <td>{{ student.Class }}반</td>
-                <td>{{ student.number }}번</td>
-                <td>{{ student.name }}</td>
-              </tr>
-            {% endfor %}
-            {% else %}
-            <tr>
-              <td colspan="5" class="text-body-secondary">검색된 학생이 없습니다.</td>
-            </tr>
-          {% endif %}
-        </tbody>
-      </table>
-    </div> -->
   </div>
   <div class="child grant">
-    <form method="post" name="scoreForm" class="post-form child">
+    <form method="post" name="scoreGrantForm" class="post-form child" id="scoreGrantForm">
       <!-- variables -->
       <input type="hidden" name="teacherId" value="1">
-      <input type="hidden" name="studentIds" value="1">
+      <input type="hidden" name="studentIds" value="None" id="studentIds">
       <!-- type -->
       <div class="type">
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="type" id="typeRadio1" value="True">
+          <input class="form-check-input" type="radio" name="type" id="typeRadio1" value=1 checked>
           <label class="form-check-label" for="typeRadio1">상점</label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="radio" name='type' id="typeRadio2" value="False">
+          <input class="form-check-input" type="radio" name='type' id="typeRadio2" value=0>
           <label class="form-check-label" for="typeRadio2">벌점</label>
         </div>
       </div>
